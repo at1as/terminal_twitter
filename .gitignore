@@ -1,0 +1,11 @@
+/_build
+/cover
+/deps
+erl_crash.dump
+*.ez
+
+# Command line executable
+terminal_twitter
+
+# Twitter Auth secrets
+/config/secrets.exs
