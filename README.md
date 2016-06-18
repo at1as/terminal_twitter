@@ -45,22 +45,25 @@ config :extwitter, :oauth, [
 
 List of tweets on home timeline
 
-* ./terminal_twitter new
+* `./terminal_twitter new`
 
 
 Search [for term "apple"]
 
-* ./terminal_twitter search apple
+* `./terminal_twitter search apple`
 
 
 List of tweets from personal account
 
-* ./terminal_twitter me
+* `./terminal_twitter me`
 
 
 ## Usage (Package)
 
 
-* TerminalTwitter.latest(10)        # Args: Number of tweets [1 - 200]
-* TerminalTwitter.find("apple", 10) # Args: Search term, Number of tweets [1 - 200]
-* TerminalTwitter.me(10)            # Args: Number of tweets [1 - 200]
+* TerminalTwitter.latest(10)        
+  * Args: Number of tweets [1 - 200]
+* TerminalTwitter.find("apple", 10)
+  * Args: Search term, Number of tweets [1 - 200]
+* TerminalTwitter.me(10)
+  * Args: Number of tweets [1 - 200]
