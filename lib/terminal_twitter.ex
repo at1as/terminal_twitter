@@ -9,34 +9,30 @@ defmodule TerminalTwitter do
 
   def parse_args(args) do
     {_, flags, _} = OptionParser.parse(args)
-
-    if length(flags) == 2 do
-      call_function(Enum.at(flags, 0), Enum.at(flags, 1))
-    else
-      Enum.at(flags, 0) |> call_function
-    end
-  
+    if length(flags) > 3, do: call_function, else: call_function(flags)
   end
   
-  def call_function("new") do
-    latest
-  end
+  def call_function(["search", term, num]), do: find(term, num)
+  def call_function(["user", name, num]),   do: user(name, num)
+  def call_function([_, _, _]),             do: call_function
+  def call_function(["search", term]),      do: find(term)
+  def call_function(["user", name]),        do: user(name)
+  def call_function(["new", num]),          do: latest(num)
+  def call_function(["me", num]),           do: me(num)
+  def call_function([_, _]),                do: call_function
+  def call_function(["new"]),               do: latest 
+  def call_function(["me"]),                do: me
+  def call_function([_]),                   do: call_function
   
-  def call_function("search", term) do
-    find(term)
-  end
-  
-  def call_function("me") do
-    me
-  end
-
-  def call_function(function_name) do
+  def call_function do
     IO.puts """ 
-            Not a valid command!
+            \nNot a valid command!
               Try any of the following:
-                  `twitter new`
-                  `twitter search apple`
-                  `twitter me`
+                  `twitter new [number of tweets - 1-200]`
+                  `twitter search apple [number of tweets]`
+                  `twitter me [number of tweets]
+              Ex.
+                  `twitter new 100  
             """
   end
 
@@ -114,6 +110,25 @@ defmodule TerminalTwitter do
     padding
   end
 
+  
+  def user(user, items \\ 200) do
+    # TODO : DRY this up to use same function as 'me'
+    padding
+    
+    ExTwitter.user_timeline([screen_name: user, count: items])
+    |> Enum.map(fn(tweet) -> 
+      [
+        tweet.text |> line_break,
+        %{date: tweet.created_at, rt: tweet.retweet_count} |> details
+      ] 
+      |> Enum.join("\n")
+    end) 
+    |> Enum.join("\n\n-----\n\n") 
+    |> IO.puts
+    
+    padding
+  end
+  
   
   def find(search_term, items \\ 200) do
     padding
