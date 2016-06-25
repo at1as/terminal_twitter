@@ -26,13 +26,20 @@ defmodule TerminalTwitter do
   
   def call_function do
     IO.puts """ 
-            \nNot a valid command!
+            \nNot a valid command! \n
               Try any of the following:
-                  `twitter new [number of tweets - 1-200]`
-                  `twitter search apple [number of tweets]`
-                  `twitter me [number of tweets]
+                  `twitter new [number of tweets (1-200)]`
+                      >> Latest tweets \n
+                  `twitter search [search term] [num tweets]`
+                      >> Search for tweets by 'search term' \n
+                  `twitter me [num tweets]
+                      >> User accounts last tweets \n
+                  `twitter user [name] [num tweets]`
+                      >> Tweets by account \n
               Ex.
-                  `twitter new 100  
+                  `twitter new 100`
+                  `twitter search apple 10`
+                  `twitter user potus`
             """
   end
 
