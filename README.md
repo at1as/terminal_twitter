@@ -24,6 +24,10 @@ Preconditions
 
 ```
 
+## Screenshots
+
+<img src="http://at1as.github.io/github_repo_assets/terminal_twitter.png">
+
 ## Authentication
 
 Authenciation will require creating the following file in the location `config/secrets.exs`. Replace the `<twitter...>` terms below with their respective values.
